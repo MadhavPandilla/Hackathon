@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.openqa.selenium.WebDriver;
 
 import Factory.BaseClass;
+import PageObjects.Homepage;
 import PageObjects.Login;
 import PageObjects.Upcomingbikes;
 import PageObjects.Usedcars;
@@ -17,6 +18,7 @@ public class Endtoend {
 	WebDriver driver;
 	Usedcars used;
 	Login login;
+	Homepage hp;
 
 	@Given("user is on the zig wheels site")
 	public void user_is_on_the_zig_wheels_site() {
@@ -68,7 +70,7 @@ public class Endtoend {
 	public void display_all_the_popular_models_in_a_list() throws IOException, InterruptedException {
 		BaseClass.getLogger().info("Generating the all the popular models of used cars in chennai..... ");
 		used.Popularmodels();
-		// used.popularmodelslist();
+//		used.popularmodelslist();
 	}
 
 	@Given("the user is on the  zig wheels page")
@@ -90,11 +92,14 @@ public class Endtoend {
 
 	@Then("display the error message for invalid username")
 	public void display_the_error_message_for_invalid_username() throws InterruptedException {
+		hp = new Homepage(BaseClass.getDriver());
 		login.invalidusername();
+
 	}
 
 	@Then("Navigating back to homepage")
 	public void navigating_back_to_homepage() {
+		login.close();
 		login.navigatingbacktohomepage();
 	}
 }

@@ -2,7 +2,7 @@ package PageObjects;
 
 import java.time.Duration;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,6 +19,7 @@ public class Homepage extends Basepage {
 
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 	Actions act = new Actions(driver);
+	JavascriptExecutor js = (JavascriptExecutor) driver;
 
 	@FindBy(id = "forum_login_wrap_lg")
 	WebElement signin;
@@ -35,6 +36,21 @@ public class Homepage extends Basepage {
 	@FindBy(xpath = "(//a[@class='c-p'])[4]")
 	WebElement usedcars;
 
+	@FindBy(id = "report_submit_close_login")
+	WebElement closelogin;
+
+	@FindBy(id = "headerSearch")
+	WebElement search;
+
+	@FindBy(xpath = "//span[@class='h-s-v1 h-srh-i abs i-b c-p']")
+	WebElement searching;
+
+	@FindBy(id = "forum_login_title_lg")
+	WebElement signinbutton;
+
+	@FindBy(xpath = "//h1[@class='pl-15 pr-15']")
+	WebElement honda;
+
 	public void zigwheelspage() {
 		String title = driver.getTitle();
 		Assert.assertEquals(title, "New Cars & Bikes, Prices, News, Reviews, Buy & Sell Used Cars - ZigWheels.com");
@@ -42,7 +58,7 @@ public class Homepage extends Basepage {
 	}
 
 	public void signinbuttonverification() {
-		Boolean k = driver.findElement(By.id("forum_login_title_lg")).isDisplayed();
+		Boolean k = signinbutton.isDisplayed();
 		Assert.assertEquals(true, k);
 		System.out.println("Login/Signin button is present");
 	}
@@ -55,17 +71,17 @@ public class Homepage extends Basepage {
 		Boolean o = google.isDisplayed();
 		Assert.assertEquals(true, o);
 		System.out.println("Login/Register page is opened");
-		driver.findElement(By.id("report_submit_close_login")).click();
+		closelogin.click();
 	}
 
 	public void searchbutton() {
-		driver.findElement(By.id("headerSearch")).sendKeys("Honda Bikes");
-		driver.findElement(By.xpath("//span[@class='h-s-v1 h-srh-i abs i-b c-p']")).click();
+		search.sendKeys("Honda Bikes");
+		searching.click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	}
 
 	public void checkingforhondabikes() {
-		Boolean e = driver.findElement(By.xpath("//h1[@class='pl-15 pr-15']")).isDisplayed();
+		Boolean e = honda.isDisplayed();
 		Assert.assertEquals(true, e);
 		System.out.println("Honda Bikes are present");
 	}

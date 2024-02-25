@@ -65,12 +65,11 @@ public class Usedcars extends Basepage {
 		js.executeScript("arguments [0].scrollIntoView();", filter);
 		int m = 0;
 		excelutils.setCellData(File, "Sheet2", m, 0, "Popular Models");
-		excelutils.fillOrangeColor(File, "Sheet2", m, 0);
+		excelutils.fillYellowColor(File, "Sheet2", m, 0);
 		m += 1;
 		for (WebElement l : popularmodels) {
 			String h = l.getText();
 			excelutils.setCellData(File, "Sheet2", m, 0, h);
-			excelutils.fillYellowColor(File, "Sheet2", m, 0);
 			System.out.println(l.getText());
 			m += 1;
 		}
@@ -117,7 +116,6 @@ public class Usedcars extends Basepage {
 
 	public void regression() throws IOException, InterruptedException {
 		for (int i = 0; i < popular.size(); i++) {
-			String popular1 = popularmodels.get(i).getText();
 			js.executeScript("arguments [0].scrollIntoView();", filter);
 			js.executeScript("arguments [0].click();", popular.get(i));
 			Thread.sleep(5000);

@@ -37,6 +37,9 @@ public class Login extends Basepage {
 
 	@FindBy(xpath = "//*[@id=\"Header\"]/div/div[1]/div[1]/a/img")
 	WebElement Homepage;
+
+	@FindBy(id = "report_submit_close_login")
+	WebElement closelogin;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 
 	public void SigninRegister() throws InterruptedException {
@@ -63,6 +66,15 @@ public class Login extends Basepage {
 		String error1 = error.getText();
 		System.out.println(error1);
 		driver.close();
+	}
+
+	public void close() {
+		Set<String> y = new HashSet<String>();
+		y = driver.getWindowHandles();
+		List<String> m = new ArrayList<String>(y);
+		String q = m.get(0);
+		driver.switchTo().window(q);
+		closelogin.click();
 	}
 
 	public void navigatingbacktohomepage() {
